@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getTrendingMovies } from "../../services/movieService";
 import { Movie } from "../../types/movie";
+import MovieCard from "../../components/MovieCard";
+import SkeletonCard from "../../components/SkeletonCard";
 
 const Container = styled.div`
   padding: 2rem;
@@ -44,6 +46,12 @@ const Poster = styled.img`
   margin-bottom: 0.5rem;
 `;
 
+const MovieGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+`;
+
 export default function HomePage() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,17 +78,26 @@ export default function HomePage() {
   return (
     <Container>
       <Title>Trending Movies</Title>
-      <MovieList>
-        {movies.map((movie) => (
-          <MovieItem key={movie.id}>
-            <Poster
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt={movie.title}
+      {loading ? (
+        <MovieGrid>
+          {[...Array(10)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </MovieGrid>
+      ) : (
+        <MovieGrid>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              posterPath={movie.poster_path}
+              releaseDate={movie.release_date}
+              rating={movie.vote_average}
             />
-            <p>{movie.title}</p>
-          </MovieItem>
-        ))}
-      </MovieList>
+          ))}
+        </MovieGrid>
+      )}
     </Container>
   );
+  
 }
