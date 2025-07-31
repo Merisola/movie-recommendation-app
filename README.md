@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Movie Recommendation App
 
-## Getting Started
+A modern movie discovery web app built with **Next.js** and **TypeScript**. It fetches real-time trending and searched movie data from [TMDb API](https://www.themoviedb.org/), styled with **Styled Components**.
 
-First, run the development server:
+---
+
+## 🚀 Features Implemented So Far
+
+- ✅ Next.js + TypeScript project setup
+- ✅ Folder structure for clean architecture
+- ✅ Git & GitHub repo initialized and connected
+- ✅ TMDb API integration
+  - Trending movies
+  - Search functionality (coming soon!)
+- ✅ Environment variable setup for secure API key loading
+- ✅ Styled with `styled-components`
+- ✅ Error and loading states handled
+- ✅ Responsive movie card grid layout (with hover effects)
+
+---
+
+## 🛠 Tech Stack
+
+- [Next.js](https://nextjs.org/) (App Router + TypeScript)
+- [Styled Components](https://styled-components.com/)
+- [Axios](https://axios-http.com/)
+- [TMDb API](https://developer.themoviedb.org/)
+- TypeScript for type safety
+
+---
+
+## 📁 Folder Structure
+
+movie-recommendation-app/
+│
+├── app/ or pages/ # Main routing pages
+├── components/ # Reusable UI components (planned)
+├── services/ # API functions (Axios)
+│ └── movieService.ts
+├── styles/ # Global styles / themes
+├── types/ # TypeScript interfaces
+│ └── movie.ts
+├── utils/ # Utility functions (planned)
+├── .env.local # Your TMDb API Key (not committed)
+
+yaml
+Copy
+Edit
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the repository
 
 ```bash
+git clone https://github.com/your-username/movie-recommendation-app.git
+cd movie-recommendation-app
+2. Install dependencies
+bash
+Copy
+Edit
+npm install
+3. Set up environment variables
+Create a .env.local file in the root:
+
+ini
+Copy
+Edit
+NEXT_PUBLIC_API_KEY=your_tmdb_api_key_here
+You can get your API key by signing up at https://www.themoviedb.org/.
+
+4. Run the development server
+bash
+Copy
+Edit
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Visit http://localhost:3000 to view the app in your browser.
