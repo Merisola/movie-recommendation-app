@@ -11,21 +11,21 @@ import Link from "next/link";
 const Container = styled.div`
   padding: 2rem;
   font-family: sans-serif;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
   text-align: center;
   color: #e50914;
-  margin-bottom: 1rem;
-`;
+  margin-bottom: 1.5rem;
 
-const MovieList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1.5rem;
-  list-style: none;
-  padding: 0;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const FavoritesLink = styled(Link)`
@@ -34,7 +34,7 @@ const FavoritesLink = styled(Link)`
   border: 2px solid #e50914;
   color: #e50914;
   padding: 0.4rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   border-radius: 20px;
   text-decoration: none;
   font-weight: bold;
@@ -45,32 +45,23 @@ const FavoritesLink = styled(Link)`
     background-color: #e50914;
     color: #fff;
   }
-`;
 
-const MovieItem = styled.li`
-  background-color: #111;
-  color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.05);
-    background-color: #222;
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
-`;
-
-const Poster = styled.img`
-  width: 100%;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
 `;
 
 const MovieGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
 `;
 
 export default function HomePage() {
@@ -111,12 +102,12 @@ export default function HomePage() {
           {movies.map((movie) => (
             <MovieCard
               key={movie.id}
-              id={movie.id} // add this
+              id={movie.id}
               title={movie.title}
               posterPath={movie.poster_path || ""}
               releaseDate={movie.release_date}
               rating={movie.vote_average}
-              overview={movie.overview || ""} // add this
+              overview={movie.overview || ""}
               href={`/movies/${movie.id}`}
             />
           ))}
@@ -124,5 +115,4 @@ export default function HomePage() {
       )}
     </Container>
   );
-  
 }
