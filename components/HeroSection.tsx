@@ -17,11 +17,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     if (!movies || movies.length === 0) return;
 
     const interval = setInterval(() => {
-      setFade(false); // start fade out
+      setFade(false);
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % movies.length);
-        setFade(true); // fade in new slide
-      }, 500); // fade duration matches CSS below
+        setFade(true);
+      }, 500);
     }, intervalMs);
 
     return () => clearInterval(interval);
@@ -50,51 +50,58 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         opacity: fade ? 1 : 0,
       }}
     >
-      {/* Overlay for better readability */}
+      {/* Overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9))",
           zIndex: 1,
         }}
       />
-      <h1
-        style={{
-          fontSize: "2.5rem",
-          marginBottom: "1rem",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        {movie.title}
-      </h1>
-      <p
-        style={{
-          maxWidth: "600px",
-          marginBottom: "1.5rem",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        {movie.overview}
-      </p>
-      <button
+
+      {/* Content */}
+      <div
         style={{
           position: "relative",
-          backgroundColor: "#e50914",
-          color: "#fff",
-          padding: "0.5rem 1rem",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-          width: "fit-content",
           zIndex: 2,
+          maxWidth: "90%",
+          width: "100%",
         }}
       >
-        Add to Favorites
-      </button>
+        <h1
+          style={{
+            fontSize: "clamp(1.8rem, 5vw, 3rem)", // scales between 1.8rem and 3rem
+            marginBottom: "1rem",
+          }}
+        >
+          {movie.title}
+        </h1>
+        <p
+          style={{
+            fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)",
+            maxWidth: "600px",
+            marginBottom: "1.5rem",
+          }}
+        >
+          {movie.overview}
+        </p>
+        <button
+          style={{
+            backgroundColor: "#e50914",
+            color: "#fff",
+            padding: "0.5rem 1.2rem",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontSize: "1rem",
+            width: "fit-content",
+          }}
+        >
+          Add to Favorites
+        </button>
+      </div>
     </div>
   );
 };

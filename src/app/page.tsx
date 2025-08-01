@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import { getTrendingMovies } from "../../services/movieService";
 import { Movie } from "../../types/movie";
 import MovieCard from "../../components/MovieCard";
-import SkeletonCard from "../../components/SkeletonCard";
 import Link from "next/link";
 import HeroSection from "../../components/HeroSection";
 import FavoritesSummary from "../../components/FavoritesSummary";
+import Head from "next/head";
 
 const Container = styled.div`
   padding: 2rem;
@@ -71,6 +71,8 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,33 +92,35 @@ export default function HomePage() {
   if (error) return <Container>Error: {error}</Container>;
 
   return (
-    <Container>
-      {/* ✅ Hero Section */}
-      <HeroSection movies={movies} intervalMs={7000} />
+    <>
+      <Container>
+        {/* ✅ Hero Section */}
+        <HeroSection movies={movies} intervalMs={7000} />
 
-      {/* 🔥 Trending Section (your original logic) */}
-      <Title>🔥 Trending Movies</Title>
-      <FavoritesLink href="/favorites">❤️ Favorites</FavoritesLink>
+        {/* 🔥 Trending Section (your original logic) */}
+        <Title>🔥 Trending Movies</Title>
+        <FavoritesLink href="/favorites">❤️ Favorites</FavoritesLink>
 
-      <MovieGrid>
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            posterPath={movie.poster_path || ""}
-            releaseDate={movie.release_date}
-            rating={movie.vote_average}
-            overview={movie.overview || ""}
-            href={`/movies/${movie.id}`}
-          />
-        ))}
-      </MovieGrid>
+        <MovieGrid>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              posterPath={movie.poster_path || ""}
+              releaseDate={movie.release_date}
+              rating={movie.vote_average}
+              overview={movie.overview || ""}
+              href={`/movies/${movie.id}`}
+            />
+          ))}
+        </MovieGrid>
 
-      {/* 🧡 Favorites Summary */}
-      <FavoritesSummary />
+        {/* 🧡 Favorites Summary */}
+        <FavoritesSummary />
 
-      {/* 🔮 You can add more MovieRows here for Recommended, Top Rated, etc. later */}
-    </Container>
+        {/* 🔮 You can add more MovieRows here for Recommended, Top Rated, etc. later */}
+      </Container>
+    </>
   );
 }

@@ -14,6 +14,7 @@ interface MovieCardProps {
   rating: number;
   overview: string; // overview is required
   href?: string;
+  backdropPath?: string;
 }
 
 const StyledLink = styled(Link)`
@@ -91,7 +92,8 @@ export default function MovieCard({
       poster_path: posterPath,
       release_date: releaseDate,
       vote_average: rating,
-      overview, // <-- include overview here
+      overview,
+      backdrop_path: "", // <-- include overview here
     };
 
     if (isFavorite(id)) {

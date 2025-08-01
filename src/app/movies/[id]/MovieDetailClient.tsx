@@ -80,10 +80,19 @@ interface MovieDetail {
 }
 
 interface MovieDetailClientProps {
-  movie: MovieDetail;
+  movie?: MovieDetail | null;
 }
 
 export default function MovieDetailClient({ movie }: MovieDetailClientProps) {
+  if (!movie) {
+    return (
+      <Container>
+        <BackLink href="/">← Back to home</BackLink>
+        <h2>Sorry, this movie does not exist.</h2>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <BackLink href="/">← Back to home</BackLink>
