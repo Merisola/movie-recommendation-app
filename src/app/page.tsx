@@ -1,4 +1,4 @@
-"use client"; // 👈 This tells Next.js it's a Client Component
+"use client";
 
 import styled from "styled-components";
 import { useEffect, useState } from "react";
@@ -7,6 +7,8 @@ import { Movie } from "../../types/movie";
 import MovieCard from "../../components/MovieCard";
 import SkeletonCard from "../../components/SkeletonCard";
 import Link from "next/link";
+import HeroSection from "../../components/HeroSection";
+import FavoritesSummary from "../../components/FavoritesSummary";
 
 const Container = styled.div`
   padding: 2rem;
@@ -89,30 +91,32 @@ export default function HomePage() {
 
   return (
     <Container>
-      <Title>Trending Movies</Title>
+      {/* ✅ Hero Section */}
+      <HeroSection movies={movies} intervalMs={7000} />
+
+      {/* 🔥 Trending Section (your original logic) */}
+      <Title>🔥 Trending Movies</Title>
       <FavoritesLink href="/favorites">❤️ Favorites</FavoritesLink>
-      {loading ? (
-        <MovieGrid>
-          {[...Array(10)].map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </MovieGrid>
-      ) : (
-        <MovieGrid>
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              posterPath={movie.poster_path || ""}
-              releaseDate={movie.release_date}
-              rating={movie.vote_average}
-              overview={movie.overview || ""}
-              href={`/movies/${movie.id}`}
-            />
-          ))}
-        </MovieGrid>
-      )}
+
+      <MovieGrid>
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            posterPath={movie.poster_path || ""}
+            releaseDate={movie.release_date}
+            rating={movie.vote_average}
+            overview={movie.overview || ""}
+            href={`/movies/${movie.id}`}
+          />
+        ))}
+      </MovieGrid>
+
+      {/* 🧡 Favorites Summary */}
+      <FavoritesSummary />
+
+      {/* 🔮 You can add more MovieRows here for Recommended, Top Rated, etc. later */}
     </Container>
   );
 }
