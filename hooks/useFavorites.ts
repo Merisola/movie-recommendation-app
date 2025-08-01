@@ -3,19 +3,25 @@ import { Movie } from "../types/movie";
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState<Movie[]>([]);
+  const [hasMounted, setHasMounted] = useState(false);
 
+  // Load favorites from localStorage on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
+
     const stored = localStorage.getItem("favorites");
     if (stored) {
       setFavorites(JSON.parse(stored));
     }
+
+    setHasMounted(true); // mark that we're on the client now
   }, []);
 
+  // Save favorites to localStorage after mount
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !hasMounted) return;
     localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+  }, [favorites, hasMounted]);
 
   const addFavorite = (movie: Movie) => {
     setFavorites((prev) => {
@@ -32,5 +38,5 @@ export function useFavorites() {
     return favorites.some((m) => m.id === id);
   };
 
-  return { favorites, addFavorite, removeFavorite, isFavorite };
+  return { favorites, addFavorite, removeFavorite, isFavorite, hasMounted };
 }

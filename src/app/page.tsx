@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 2rem;
+  text-align: center;
   color: #e50914;
   margin-bottom: 1rem;
 `;
@@ -25,6 +26,25 @@ const MovieList = styled.ul`
   gap: 1.5rem;
   list-style: none;
   padding: 0;
+`;
+
+const FavoritesLink = styled(Link)`
+  display: inline-block;
+  background-color: transparent;
+  border: 2px solid #e50914;
+  color: #e50914;
+  padding: 0.4rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background-color: #e50914;
+    color: #fff;
+  }
 `;
 
 const MovieItem = styled.li`
@@ -79,12 +99,7 @@ export default function HomePage() {
   return (
     <Container>
       <Title>Trending Movies</Title>
-      <Link
-        href="/favorites"
-        style={{ color: "#e50914", textDecoration: "none" }}
-      >
-        ❤️ Favorites
-      </Link>
+      <FavoritesLink href="/favorites">❤️ Favorites</FavoritesLink>
       {loading ? (
         <MovieGrid>
           {[...Array(10)].map((_, i) => (

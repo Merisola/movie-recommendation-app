@@ -1,24 +1,38 @@
 "use client";
+
 import { useFavorites } from "../../../hooks/useFavorites";
 import MovieCard from "../../../components/MovieCard";
+import styled from "styled-components";
+
+const Container = styled.div`
+  padding: 2rem;
+  font-family: sans-serif;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  color: #e50914;
+  margin-bottom: 1rem;
+`;
+
+const MovieGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+`;
 
 export default function FavoritesPage() {
-  const { favorites } = useFavorites();
+  const { favorites, hasMounted } = useFavorites();
+
+  if (!hasMounted) return null;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1 style={{ marginBottom: "1rem" }}>❤️ Your Favorite Movies</h1>
-
+    <Container>
+      <Title>❤️ Your Favorite Movies</Title>
       {favorites.length === 0 ? (
         <p>No favorites saved yet.</p>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gap: "1rem",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-          }}
-        >
+        <MovieGrid>
           {favorites.map((movie) => (
             <MovieCard
               key={movie.id}
@@ -31,8 +45,8 @@ export default function FavoritesPage() {
               href={`/movies/${movie.id}`}
             />
           ))}
-        </div>
+        </MovieGrid>
       )}
-    </div>
+    </Container>
   );
 }
