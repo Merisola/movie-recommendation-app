@@ -2,12 +2,14 @@
 
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface MovieCardProps {
   title: string;
   posterPath: string;
   releaseDate: string;
   rating: number;
+  href?: string;
 }
 
 const Card = styled(motion.div)`
@@ -19,6 +21,11 @@ const Card = styled(motion.div)`
   text-align: center;
   padding-bottom: 1rem;
   transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
 `;
 
 const Poster = styled.img`
@@ -43,16 +50,22 @@ export default function MovieCard({
   posterPath,
   releaseDate,
   rating,
+  href = "#",
 }: MovieCardProps) {
   return (
-    <Card whileHover={{ scale: 1.05, filter: "brightness(1.2)" }}>
-      <Poster
-        src={`https://image.tmdb.org/t/p/w500${posterPath}`}
-        alt={title}
-      />
-      <Title>{title}</Title>
-      <SubText>Release: {releaseDate}</SubText>
-      <SubText>⭐ {rating}/10</SubText>
-    </Card>
+    <Link
+      href={href}
+      style={{ textDecoration: "none", color: "inherit", display: "block" }}
+    >
+      <Card whileHover={{ scale: 1.05, filter: "brightness(1.2)" }}>
+        <Poster
+          src={`https://image.tmdb.org/t/p/w500${posterPath}`}
+          alt={title}
+        />
+        <Title>{title}</Title>
+        <SubText>Release: {releaseDate}</SubText>
+        <SubText>⭐ {rating}/10</SubText>
+      </Card>
+    </Link>
   );
 }

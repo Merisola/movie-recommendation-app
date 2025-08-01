@@ -90,9 +90,10 @@ export default function HomePage() {
             <MovieCard
               key={movie.id}
               title={movie.title}
-              posterPath={movie.poster_path}
+              posterPath={movie.poster_path || ""}
               releaseDate={movie.release_date}
               rating={movie.vote_average}
+              href={`/movies/${movie.id}`}
             />
           ))}
         </MovieGrid>
