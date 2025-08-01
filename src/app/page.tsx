@@ -6,6 +6,7 @@ import { getTrendingMovies } from "../../services/movieService";
 import { Movie } from "../../types/movie";
 import MovieCard from "../../components/MovieCard";
 import SkeletonCard from "../../components/SkeletonCard";
+import Link from "next/link";
 
 const Container = styled.div`
   padding: 2rem;
@@ -78,6 +79,12 @@ export default function HomePage() {
   return (
     <Container>
       <Title>Trending Movies</Title>
+      <Link
+        href="/favorites"
+        style={{ color: "#e50914", textDecoration: "none" }}
+      >
+        ❤️ Favorites
+      </Link>
       {loading ? (
         <MovieGrid>
           {[...Array(10)].map((_, i) => (
@@ -89,10 +96,12 @@ export default function HomePage() {
           {movies.map((movie) => (
             <MovieCard
               key={movie.id}
+              id={movie.id} // add this
               title={movie.title}
               posterPath={movie.poster_path || ""}
               releaseDate={movie.release_date}
               rating={movie.vote_average}
+              overview={movie.overview || ""} // add this
               href={`/movies/${movie.id}`}
             />
           ))}
