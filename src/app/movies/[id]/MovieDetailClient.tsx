@@ -4,13 +4,13 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const Container = styled.div`
-  max-width: 900px; /* limits the width to a nice readable size */
-  margin: 2rem auto; /* centers horizontally and adds vertical space */
-  padding: 1rem 2rem; /* less vertical padding, decent horizontal */
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
   color: #fff;
   background-color: #111;
-  border-radius: 10px; /* soften the edges */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* subtle shadow for pop */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 `;
 
 const BackLink = styled(Link)`
@@ -24,7 +24,7 @@ const BackLink = styled(Link)`
   }
 `;
 
-const MovieWrapper = styled.div`
+const MovieWrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -39,10 +39,11 @@ const Poster = styled.img`
   max-width: 300px;
   border-radius: 10px;
   object-fit: cover;
+  flex-shrink: 0;
 `;
 
 const Info = styled.div`
-  max-width: 600px;
+  flex: 1;
   color: #eee;
 `;
 
@@ -89,6 +90,10 @@ export default function MovieDetailClient({ movie }: MovieDetailClientProps) {
       <Container>
         <BackLink href="/">← Back to home</BackLink>
         <h2>Sorry, this movie does not exist.</h2>
+        <p>
+          The movie you&apos;re trying to view could not be found. Please check
+          the URL or return home.
+        </p>
       </Container>
     );
   }
@@ -101,7 +106,7 @@ export default function MovieDetailClient({ movie }: MovieDetailClientProps) {
         {movie.poster_path && (
           <Poster
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
+            alt={movie.title || "Movie Poster"}
           />
         )}
 
