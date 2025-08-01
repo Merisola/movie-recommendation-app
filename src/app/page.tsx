@@ -8,7 +8,6 @@ import MovieCard from "../../components/MovieCard";
 import Link from "next/link";
 import HeroSection from "../../components/HeroSection";
 import FavoritesSummary from "../../components/FavoritesSummary";
-import Head from "next/head";
 
 const Container = styled.div`
   padding: 2rem;
